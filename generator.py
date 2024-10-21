@@ -1,6 +1,6 @@
 import random
 
-size = 500
+size = 5
 lower_bound = 0
 upper_bound = 500
 

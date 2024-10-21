@@ -21,7 +21,7 @@ run_tests() {
         echo $RESULT
 }
 
-for i in {1..10}
+for i in {1..100}
 do
 	TEST=$(python3 generator.py)
 	run_tests

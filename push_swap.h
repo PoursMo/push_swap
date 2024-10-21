@@ -13,11 +13,11 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
@@ -27,10 +27,10 @@ typedef struct s_list
 
 typedef struct s_inst
 {
-	char *instruction;
-	void (*func_a)(t_list **);
-	void (*func_b)(t_list **);
-	void (*func_ab)(t_list **, t_list **);
+	char	*instruction;
+	void	(*func_a)(t_list **);
+	void	(*func_b)(t_list **);
+	void	(*func_ab)(t_list **, t_list **);
 }	t_inst;
 
 //utils_instructions
@@ -39,6 +39,9 @@ void	push(t_list **dst, t_list **src);
 void	rotate(t_list **lst);
 void	reverse_rotate(t_list **lst);
 void	call_instruction(t_inst instruction, t_list **a, t_list **b);
+
+//utils_checks
+int	is_argv_valid(int argc, char **argv, t_list *a);
 
 //utils_lists
 t_list	*ft_lstnew(void *content);
@@ -53,7 +56,8 @@ void	print_list(t_list *lst);
 
 //utils
 void	ft_putstr_fd(char *s, int fd);
+int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
 
 #endif

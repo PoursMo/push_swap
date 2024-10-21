@@ -43,11 +43,11 @@ int	ft_lstsize(t_list *lst)
 	return (size);
 }
 
-void free_list(t_list *lst)
+void	free_list(t_list *lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
-	while(lst)
+	while (lst)
 	{
 		temp = lst->next;
 		free(lst->content);

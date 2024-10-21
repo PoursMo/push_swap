@@ -6,7 +6,7 @@
 /*   By: aloubry <aloubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:21:30 by aloubry           #+#    #+#             */
-/*   Updated: 2024/10/16 15:34:20 by aloubry          ###   ########.fr       */
+/*   Updated: 2024/10/18 12:07:59 by aloubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ int	ft_atoi(const char *nptr)
 	return (num * mult);
 }
 
-void print_list(t_list *lst)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while(lst)
+	if (!n)
+		return (0);
+	while (*s1 && *s2 && *s1 == *s2 && --n)
 	{
-		printf("%d ", *(int*)lst->content);
-		lst = lst->next;
+		s1++;
+		s2++;
 	}
-	printf("\n");
+	return ((unsigned char) *s1 - (unsigned char) *s2);
 }

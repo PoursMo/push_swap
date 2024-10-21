@@ -1,0 +1,11 @@
+sa	0
+sb	1
+ss	2
+pa	3
+pb	4
+ra	5
+rb	6
+rr	7
+rra	8
+rrb	9
+rrr	10

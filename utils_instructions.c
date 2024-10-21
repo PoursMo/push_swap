@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instructions.c                                     :+:      :+:    :+:   */
+/*   utils_instructions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aloubry <aloubry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:31:34 by aloubry           #+#    #+#             */
-/*   Updated: 2024/10/16 16:23:58 by aloubry          ###   ########.fr       */
+/*   Updated: 2024/10/18 17:21:22 by aloubry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void push(t_list **dst, t_list **src)
 	*dst = temp;
 }
 
-void	reverse(t_list **lst)
+void	rotate(t_list **lst)
 {
 	t_list *i;
 	t_list *temp;
@@ -65,4 +65,15 @@ void	reverse_rotate(t_list **lst)
 	i->next = NULL;
 	last->next = *lst;
 	*lst = last;
+}
+
+void call_instruction(t_inst instruction, t_list **a, t_list **b)
+{
+	if(instruction.func_a)
+		instruction.func_a(a);
+	if(instruction.func_b)
+		instruction.func_b(b);
+	if(instruction.func_ab)
+		instruction.func_ab(a, b);
+	ft_putstr_fd(instruction.instruction, 1);
 }

@@ -49,15 +49,37 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 void	free_list(t_list *lst);
 
-//utils2
-t_list	*generate_a(int argc, char **argv);
-int		is_sorted(t_list *lst);
-void	print_list(t_list *lst);
+//utils_split
+char	**ft_split(const char *str, char c);
+char	**free_split(char **split, int count);
 
-//utils
+//utils_strings
 void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int c);
 int		ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
+
+//utils_strings_2
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
+
+//utils_other
+void	exit_error(t_list *a, char **sargv, char **argv, int argc);
+void	exit_success(t_list *a, char **sargv, char **argv, int argc);
+int		max(int a, int b);
+
+//utils_algo
+int		is_sorted(t_list *lst);
+t_list	*find_biggest_in_list(t_list *lst);
+t_list	*find_smallest_in_list(t_list *lst);
+t_list	*find_target_position_in_b(int avalue, t_list **b);
+t_list	*find_target_position_in_a(int bvalue, t_list **a);
+
+//utils_algo_2
+int		get_index_in_list(t_list *target, t_list **lst);
+int		get_number_of_reverses(int index, int lstsize);
+
+//debug
+void	print_list(t_list *lst);
 
 #endif

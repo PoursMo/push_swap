@@ -50,112 +50,42 @@ void	sort_3_nums(t_list **lst)
 		call_instruction(g_instructions[0], lst, NULL);
 }
 
-t_list	*find_biggest_in_list(t_list *lst)
-{
-	t_list	*biggest;
 
-	biggest = lst;
-	while (lst)
+
+
+
+
+
+
+
+
+
+
+int rotate_target_towards_top(int index, t_inst rotate, t_inst reverse_rotate, t_list **lst)
+{
+	int lstsize;
+
+	lstsize = ft_lstsize(*lst);
+	if(index > 1)
 	{
-		if (*(int *)lst->content > *(int *)biggest->content)
-			biggest = lst;
-		lst = lst->next;
-	}
-	return (biggest);
-}
-
-t_list	*find_smallest_in_list(t_list *lst)
-{
-	t_list	*smallest;
-
-	smallest = lst;
-	while (lst)
-	{
-		if (*(int *)lst->content < *(int *)smallest->content)
-			smallest = lst;
-		lst = lst->next;
-	}
-	return (smallest);
-}
-
-t_list	*find_target_position_in_b(int avalue, t_list **b)
-{
-	t_list	*i;
-
-	i = *b;
-	while (i->next)
-	{
-		if (avalue < *(int *)i->content && avalue > *(int *)i->next->content)
-			return (i->next);
-		i = i->next;
-	}
-	if (avalue < *(int *)i->content && avalue > *(int *)(*b)->content)
-		return (NULL);
-	return (find_biggest_in_list(*b));
-}
-
-int	get_index_in_list(t_list *target, t_list **lst)
-{
-	t_list	*i;
-	int		index;
-
-	if (!target)
+		if(index <= lstsize / 2 + 1)
+			call_instruction(rotate, lst, NULL);
+		else
+			call_instruction(reverse_rotate, lst, NULL);
 		return (1);
-	i = *lst;
-	index = 1;
-	while (i != target)
-	{
-		index++;
-		i = i->next;
 	}
-	return (index);
-}
-
-int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-int	get_number_of_reverses(int index, int lstsize)
-{
-	if (index <= lstsize / 2)
-		return (index - 1);
-	return lstsize - index + 1;
-}
-
-t_list	*find_target_position_in_a(int bvalue, t_list **a)
-{
-	t_list	*i;
-
-	i = *a;
-	while (i->next)
-	{
-		if (bvalue > *(int *)i->content && bvalue < *(int *)i->next->content)
-			return (i->next);
-		i = i->next;
-	}
-	if (bvalue > *(int *)i->content && bvalue < *(int *)(*a)->content)
-		return (NULL);
-	return (find_smallest_in_list(*a));
+	return (0);
 }
 
 void	push_in_a(t_list **a, t_list **b)
 {
-	int	index;
+	// t_list *target_position;
 
+	// target_position = ;
 	while (*b)
 	{
-		index = get_index_in_list(find_target_position_in_a(*(int *)(*b)->content, a), a);
-		while (index > 1)
-		{
-			if (index <= ft_lstsize(*a) / 2)
-				call_instruction(g_instructions[5], a, b);
-			else
-				call_instruction(g_instructions[8], a, b);
-			index = get_index_in_list(find_target_position_in_a(*(int *)(*b)->content, a), a);
-		}
+		while (rotate_target_towards_top(get_index_in_list(find_target_position_in_a(*(int *)(*b)->content, a), a), g_instructions[5], g_instructions[8], a))
+			;
 		call_instruction(g_instructions[3], a, b);
 	}
 }
@@ -163,18 +93,10 @@ void	push_in_a(t_list **a, t_list **b)
 void	get_min_on_top(t_list **lst)
 {
 	t_list	*min;
-	int		index;
 
 	min = find_smallest_in_list(*lst);
-	index = get_index_in_list(min, lst);
-	while (index > 1)
-	{
-		if (index <= ft_lstsize(*lst) / 2)
-			call_instruction(g_instructions[5], lst, NULL);
-		else
-			call_instruction(g_instructions[8], lst, NULL);
-		index = get_index_in_list(min, lst);
-	}
+	while(rotate_target_towards_top(get_index_in_list(min, lst), g_instructions[5], g_instructions[8], lst))
+		;
 }
 
 void	push_best_in_b(t_list *best, t_list **a, t_list **b)
@@ -186,9 +108,9 @@ void	push_best_in_b(t_list *best, t_list **a, t_list **b)
 	index_b = get_index_in_list(find_target_position_in_b(*(int *)best->content, b), b);
 	while (index_a > 1 && index_b > 1)
 	{
-		if (index_a <= ft_lstsize(*a) / 2 && index_b <= ft_lstsize(*b) / 2)
+		if (index_a <= ft_lstsize(*a) / 2 + 1 && index_b <= ft_lstsize(*b) / 2 + 1)
 			call_instruction(g_instructions[7], a, b);
-		else if (index_a > ft_lstsize(*a) / 2 && index_b > ft_lstsize(*b) / 2)
+		else if (index_a > ft_lstsize(*a) / 2 + 1 && index_b > ft_lstsize(*b) / 2 + 1)
 			call_instruction(g_instructions[10], a, b);
 		else
 			break ;
@@ -198,7 +120,7 @@ void	push_best_in_b(t_list *best, t_list **a, t_list **b)
 	index_a = get_index_in_list(best, a);
 	while (index_a > 1)
 	{
-		if (index_a <= ft_lstsize(*a) / 2)
+		if (index_a <= ft_lstsize(*a) / 2 + 1)
 			call_instruction(g_instructions[5], a, b);
 		else
 			call_instruction(g_instructions[8], a, b);
@@ -207,7 +129,7 @@ void	push_best_in_b(t_list *best, t_list **a, t_list **b)
 	index_b = get_index_in_list(find_target_position_in_b(*(int *)best->content, b), b);
 	while (index_b > 1)
 	{
-		if (index_b <= ft_lstsize(*b) / 2)
+		if (index_b <= ft_lstsize(*b) / 2 + 1)
 			call_instruction(g_instructions[6], a, b);
 		else
 			call_instruction(g_instructions[9], a, b);
@@ -228,7 +150,8 @@ void	push_swap(t_list **a, t_list **b)
 	int		inst_count;
 
 	call_instruction(g_instructions[4], b, a);
-	call_instruction(g_instructions[4], b, a);
+	if(ft_lstsize(*a) > 3)
+		call_instruction(g_instructions[4], b, a);
 	while (!is_sorted(*a) && ft_lstsize(*a) > 3)
 	{
 		i = *a;
@@ -239,7 +162,7 @@ void	push_swap(t_list **a, t_list **b)
 		while (i)
 		{
 			btarget_index = get_index_in_list(find_target_position_in_b(*(int *)i->content, b), b);
-			if ((btarget_index <= bsize / 2 && aindex <= asize / 2) || (btarget_index > bsize / 2 && aindex > asize / 2))
+			if ((btarget_index <= bsize / 2 + 1 && aindex <= asize / 2 + 1) || (btarget_index > bsize / 2 + 1 && aindex > asize / 2 + 1))
 				inst_count = max(get_number_of_reverses(btarget_index, bsize), get_number_of_reverses(aindex, asize));
 			else
 				inst_count = get_number_of_reverses(aindex, asize) + get_number_of_reverses(btarget_index, bsize);
@@ -260,7 +183,66 @@ void	push_swap(t_list **a, t_list **b)
 	get_min_on_top(a);
 }
 
+t_list	*generate_list(int argc, char **argv)
+{
+	int		*num;
+	t_list	*new;
+	t_list	*a;
 
+	a = NULL;
+	while (--argc >= 0)
+	{
+		num = malloc(sizeof(int));
+		if (!num)
+		{
+			free_list(a);
+			return (NULL);
+		}
+		*num = ft_atoi(argv[argc]);
+		new = ft_lstnew(num);
+		if (!new)
+		{
+			free(num);
+			free_list(a);
+			return (NULL);
+		}
+		ft_lstadd_front(&a, new);
+	}
+	return (a);
+}
+
+t_list *setup(int argc, char **argv)
+{
+	t_list	*a;
+	char **sargv;
+
+	sargv = argv + 1;
+	if(argc == 2)
+	{
+		sargv = ft_split(argv[1], ' ');
+		argc = 0;
+		while (sargv[argc])
+			argc++;
+	}
+	else
+		argc--;
+	a = generate_list(argc, sargv);
+	if (!a || !is_argv_valid(argc, sargv, a))
+		exit_error(a, sargv, argv, argc);
+	if (is_sorted(a))
+		exit_success(a, sargv, argv, argc);
+	if (ft_lstsize(a) == 2)
+	{
+		call_instruction(g_instructions[0], &a, NULL);
+		exit_success(a, sargv, argv, argc);
+	}
+	if (ft_lstsize(a) == 3)
+	{
+		sort_3_nums(&a);
+		exit_success(a, sargv, argv, argc);
+	}
+	return (a);
+}
 
 int	main(int argc, char **argv)
 {
@@ -269,26 +251,8 @@ int	main(int argc, char **argv)
 
 	if(argc == 1)
 		return (0);
-	a = generate_a(argc, argv);
+	a = setup(argc, argv);
 	b = NULL;
-	if (!a || !is_argv_valid(argc, argv, a))
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (0);
-	}
-	if (is_sorted(a))
-		return (0);
-	if (argc == 3)
-	{
-		ft_putstr_fd("sa\n", 1);
-		swap(&a);
-		return (0);
-	}
-	if (argc == 4)
-	{
-		sort_3_nums(&a);
-		return (0);
-	}
 	push_swap(&a, &b);
 	free_list(a);
 }

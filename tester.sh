@@ -1,9 +1,16 @@
 #!/bin/bash
 
+PRINT=false
+SIZE=5
+NUMTESTS=10
+
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --checker) MODE="checker" ;;
-        --count) MODE="count" ;; 
+        --checker | -ch) MODE="checker" ;;
+        --count | -co) MODE="count" ;; 
+		--print|-pr) PRINT=true ;;
+		--size | -sz) SIZE=$2; shift ;;
+		--numtests | -nt) NUMTESTS=$2; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -21,8 +28,11 @@ run_tests() {
         echo $RESULT
 }
 
-for i in {1..100}
+for i in $(seq 1 $NUMTESTS);
 do
-	TEST=$(python3 generator.py)
+	TEST=$(python3 generator.py $SIZE -500 500)
+	if [ "$PRINT" = true ]; then
+		echo $TEST
+	fi
 	run_tests
 done

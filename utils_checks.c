@@ -13,23 +13,6 @@ static int has_non_digit(char *str)
 	return (0);
 }
 
-static int	ft_memcmp(const void *s1, const void *s2, size_t n)
-{
-	unsigned char	*cs1;
-	unsigned char	*cs2;
-
-	if (!n)
-		return (0);
-	cs1 = (unsigned char *)s1;
-	cs2 = (unsigned char *)s2;
-	while (*cs1 == *cs2 && --n)
-	{
-		cs1++;
-		cs2++;
-	}
-	return (*cs1 - *cs2);
-}
-
 static int has_non_int32(char *str)
 {
 	int strlen;
@@ -71,7 +54,7 @@ static int has_duplicates(t_list *lst)
 
 int is_argv_valid(int argc, char **argv, t_list *a)
 {
-	while(--argc)
+	while(--argc >= 0)
 	{
 		if (has_non_digit(argv[argc]) || has_non_int32(argv[argc]))
 			return (0);

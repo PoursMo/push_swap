@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	swap(t_list **lst)
+static void	s(t_list **lst)
 {
 	t_list	*temp;
 
@@ -23,7 +23,7 @@ void	swap(t_list **lst)
 	(*lst)->next->content = temp;
 }
 
-void	push(t_list **dst, t_list **src)
+static void	p(t_list **dst, t_list **src)
 {
 	t_list	*temp;
 
@@ -35,7 +35,7 @@ void	push(t_list **dst, t_list **src)
 	*dst = temp;
 }
 
-void	rotate(t_list **lst)
+static void	r(t_list **lst)
 {
 	t_list	*i;
 	t_list	*temp;
@@ -51,7 +51,7 @@ void	rotate(t_list **lst)
 	temp->next = NULL;
 }
 
-void	reverse_rotate(t_list **lst)
+static void	rr(t_list **lst)
 {
 	t_list	*i;
 	t_list	*last;
@@ -67,13 +67,30 @@ void	reverse_rotate(t_list **lst)
 	*lst = last;
 }
 
-void	call_instruction(t_inst instruction, t_list **a, t_list **b)
+void	call_instruction(char *instruction, t_list **a, t_list **b)
 {
-	if (instruction.func_a)
-		instruction.func_a(a);
-	if (instruction.func_b)
-		instruction.func_b(b);
-	if (instruction.func_ab)
-		instruction.func_ab(a, b);
-	ft_putstr_fd(instruction.instruction, 1);
+	static const t_inst	instructions[11] = {
+	{"sa\n", s, NULL, NULL}, {"sb\n", NULL, s, NULL}, {"ss\n", s, s, NULL},
+	{"pa\n", NULL, NULL, p}, {"pb\n", NULL, NULL, p},
+	{"ra\n", r, NULL, NULL}, {"rb\n", NULL, r, NULL}, {"rr\n", r, r, NULL},
+	{"rra\n", rr, NULL, NULL}, {"rrb\n", NULL, rr, NULL},
+	{"rrr\n", rr, rr, NULL}};
+	int					i;
+
+	i = 0;
+	while (i < 11)
+	{
+		if (ft_strncmp(instruction, instructions[i].instruction, 4) == 0)
+		{
+			if (instructions[i].func_a)
+				instructions[i].func_a(a);
+			if (instructions[i].func_b)
+				instructions[i].func_b(b);
+			if (instructions[i].func_ab)
+				instructions[i].func_ab(a, b);
+			ft_putstr_fd(instruction, 1);
+			return ;
+		}
+		i++;
+	}
 }

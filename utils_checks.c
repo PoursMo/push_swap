@@ -26,9 +26,9 @@ static int has_non_int32(char *str)
 		return (1);
 	if (strlen == 10)
 	{
-		if (is_negative && ft_memcmp(str, "2147483648", 10) > 0)
+		if (is_negative && ft_strncmp(str, "2147483648", 10) > 0)
 			return (1);
-		if (!is_negative && ft_memcmp(str, "2147483647", 10) > 0)
+		if (!is_negative && ft_strncmp(str, "2147483647", 10) > 0)
 			return (1);
 	}
 	return (0);

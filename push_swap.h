@@ -34,11 +34,7 @@ typedef struct s_inst
 }	t_inst;
 
 //utils_instructions
-void	swap(t_list **lst);
-void	push(t_list **dst, t_list **src);
-void	rotate(t_list **lst);
-void	reverse_rotate(t_list **lst);
-void	call_instruction(t_inst instruction, t_list **a, t_list **b);
+void	call_instruction(char *instruction, t_list **a, t_list **b);
 
 //utils_checks
 int	is_argv_valid(int argc, char **argv, t_list *a);
@@ -61,7 +57,7 @@ size_t	ft_strlen(const char *s);
 
 //utils_strings_2
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //utils_other
 void	exit_error(t_list *a, char **sargv, char **argv, int argc);
@@ -76,8 +72,11 @@ t_list	*find_target_position_in_b(int avalue, t_list **b);
 t_list	*find_target_position_in_a(int bvalue, t_list **a);
 
 //utils_algo_2
-int		get_index_in_list(t_list *target, t_list **lst);
+int		lstindex(t_list *target, t_list *lst);
 int		get_number_of_reverses(int index, int lstsize);
+void	sort_3_nums(t_list **lst);
+void	rotate_target_topa(t_list *target, t_list **a);
+void	rotate_target_topb(t_list *target, t_list **b);
 
 //debug
 void	print_list(t_list *lst);

@@ -15,19 +15,14 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (srclen);
 }
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	*cs1;
-	unsigned char	*cs2;
-
 	if (!n)
 		return (0);
-	cs1 = (unsigned char *)s1;
-	cs2 = (unsigned char *)s2;
-	while (*cs1 == *cs2 && --n)
+	while (*s1 && *s2 && *s1 == *s2 && --n)
 	{
-		cs1++;
-		cs2++;
+		s1++;
+		s2++;
 	}
-	return (*cs1 - *cs2);
+	return ((unsigned char) *s1 - (unsigned char) *s2);
 }

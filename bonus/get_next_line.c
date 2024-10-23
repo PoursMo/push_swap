@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "checker.h"
 
 static char	*strnjoin(char *s1, char *s2, size_t s2n)
 {

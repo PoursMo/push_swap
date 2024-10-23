@@ -48,8 +48,8 @@ re: fclean all
 
 bonus: $(BONUSNAME)
 
-$(BONUSNAME):
-	$(CC) $(FLAGS) $(BONUSSRCS) -o $@
+$(BONUSNAME): $(BONUSOBJS)
+	$(CC) $(FLAGS) $(BONUSOBJS) -o $@
 
 bonusclean:
 	rm -f $(BONUSOBJS)

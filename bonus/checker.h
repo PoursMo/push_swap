@@ -36,10 +36,24 @@ int		ft_lstsize(t_list *lst);
 void	free_list(t_list *lst);
 
 //get_next_line
+# define MAX_FD 1024
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
+typedef struct s_buffer
+{
+	char	buffer[BUFFER_SIZE];
+	size_t	offset;
+}	t_buffer;
+
+void	*ft_memchr(const void *s, int c, size_t n);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
 char	*get_next_line(int fd);
 
 //utils_algo
-int	is_sorted(t_list *lst);
+int		is_sorted(t_list *lst);
 
 //utils_split
 char	**ft_split(const char *str, char c);

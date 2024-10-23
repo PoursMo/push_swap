@@ -28,14 +28,6 @@ static t_list	*generate_a(int argc, char **argv)
 	return (a);
 }
 
-static void	perform_checks(t_list *a, int argc, char **sargv, char **argv)
-{
-	if (!a || !is_argv_valid(argc, sargv, a))
-		exit_error(a, sargv, argv, argc);
-	if (is_sorted(a))
-		exit_success(a, sargv, argv, argc);
-}
-
 void	setup(t_list **a, int *argc, char **argv, char ***sargv)
 {
 	*sargv = argv + 1;
@@ -49,5 +41,6 @@ void	setup(t_list **a, int *argc, char **argv, char ***sargv)
 	else
 		(*argc)--;
 	*a = generate_a(*argc, *sargv);
-	perform_checks(*a, *argc, *sargv, argv);
+	if (!*a || !is_argv_valid(*argc, *sargv, *a))
+		exit_error(*a, *sargv, argv, *argc);
 }

@@ -2,6 +2,8 @@
 
 static int	has_non_digit(char *str)
 {
+	if (!str || !*str)
+		return (1);
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)

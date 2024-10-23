@@ -1,22 +1,18 @@
 #include "checker.h"
 
-void	check_line(char *line)
+int	is_line_ok(char *line)
 {
-	if (!(ft_strncmp(line, "sa\n", 3) == 0
-			|| ft_strncmp(line, "sb\n", 3) == 0
-			|| ft_strncmp(line, "ss\n", 3) == 0
-			|| ft_strncmp(line, "pa\n", 3) == 0
-			|| ft_strncmp(line, "pb\n", 3) == 0
-			|| ft_strncmp(line, "ra\n", 3) == 0
-			|| ft_strncmp(line, "rb\n", 3) == 0
-			|| ft_strncmp(line, "rr\n", 3) == 0
-			|| ft_strncmp(line, "rra\n", 4) == 0
-			|| ft_strncmp(line, "rrb\n", 4) == 0
-			|| ft_strncmp(line, "rrr\n", 4) == 0))
-	{
-		free(line);
-		exit_error(NULL, NULL, NULL, 0);
-	}
+	return (ft_strncmp(line, "sa\n", 3) == 0
+		|| ft_strncmp(line, "sb\n", 3) == 0
+		|| ft_strncmp(line, "ss\n", 3) == 0
+		|| ft_strncmp(line, "pa\n", 3) == 0
+		|| ft_strncmp(line, "pb\n", 3) == 0
+		|| ft_strncmp(line, "ra\n", 3) == 0
+		|| ft_strncmp(line, "rb\n", 3) == 0
+		|| ft_strncmp(line, "rr\n", 3) == 0
+		|| ft_strncmp(line, "rra\n", 4) == 0
+		|| ft_strncmp(line, "rrb\n", 4) == 0
+		|| ft_strncmp(line, "rrr\n", 4) == 0);
 }
 
 void	checker(t_list **a, t_list **b)
@@ -26,7 +22,12 @@ void	checker(t_list **a, t_list **b)
 	line = get_next_line(0);
 	while (line)
 	{
-		check_line(line);
+		if (!is_line_ok(line))
+		{
+			free(line);
+			ft_putstr_fd("Error\n", 2);
+			return ;
+		}
 		if (ft_strncmp(line, "pb\n", 3) == 0)
 			call_instruction(line, b, a);
 		else

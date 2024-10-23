@@ -17,7 +17,7 @@ int	lstindex(t_list *target, t_list *lst)
 	return (index);
 }
 
-int	get_number_of_reverses(int index, int lstsize)
+int	get_rev_count(int index, int lstsize)
 {
 	if (index <= lstsize / 2 + 1)
 		return (index - 1);
@@ -48,16 +48,16 @@ void	sort_3_nums(t_list **lst)
 		call_instruction("sa\n", lst, NULL);
 }
 
-void rotate_target_topa(t_list *target, t_list **a)
+void	rotate_target_topa(t_list *target, t_list **a)
 {
-	int lstsize;
-	int index;
+	int	lstsize;
+	int	index;
 
 	lstsize = ft_lstsize(*a);
 	index = lstindex(target, *a);
-	while(index > 1)
+	while (index > 1)
 	{
-		if(index <= lstsize / 2 + 1)
+		if (index <= lstsize / 2 + 1)
 			call_instruction("ra\n", a, NULL);
 		else
 			call_instruction("rra\n", a, NULL);
@@ -65,16 +65,16 @@ void rotate_target_topa(t_list *target, t_list **a)
 	}
 }
 
-void rotate_target_topb(t_list *target, t_list **b)
+void	rotate_target_topb(t_list *target, t_list **b)
 {
-	int lstsize;
-	int index;
+	int	lstsize;
+	int	index;
 
 	lstsize = ft_lstsize(*b);
 	index = lstindex(target, *b);
-	while(index > 1)
+	while (index > 1)
 	{
-		if(index <= lstsize / 2 + 1)
+		if (index <= lstsize / 2 + 1)
 			call_instruction("rb\n", NULL, b);
 		else
 			call_instruction("rrb\n", NULL, b);

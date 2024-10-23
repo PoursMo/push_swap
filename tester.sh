@@ -4,6 +4,8 @@ PRINT=false
 SIZE=5
 NUMTESTS=10
 
+make re
+
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         --checker | -ch) MODE="checker" ;;

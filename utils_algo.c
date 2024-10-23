@@ -43,7 +43,7 @@ t_list	*find_smallest_in_list(t_list *lst)
 	return (smallest);
 }
 
-t_list	*find_target_position_in_b(int avalue, t_list **b)
+t_list	*find_targ_pos_in_b(int avalue, t_list **b)
 {
 	t_list	*i;
 
@@ -59,7 +59,7 @@ t_list	*find_target_position_in_b(int avalue, t_list **b)
 	return (find_biggest_in_list(*b));
 }
 
-t_list	*find_target_position_in_a(int bvalue, t_list **a)
+t_list	*find_targ_pos_in_a(int bvalue, t_list **a)
 {
 	t_list	*i;
 

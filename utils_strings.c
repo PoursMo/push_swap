@@ -51,7 +51,6 @@ int	ft_atoi(const char *nptr)
 	return (num * mult);
 }
 
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;

@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-static int has_non_digit(char *str)
+static int	has_non_digit(char *str)
 {
-	if(*str == '-' || *str == '+')
+	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
 	{
@@ -13,13 +13,13 @@ static int has_non_digit(char *str)
 	return (0);
 }
 
-static int has_non_int32(char *str)
+static int	has_non_int32(char *str)
 {
-	int strlen;
-	int is_negative;
+	int	strlen;
+	int	is_negative;
 
 	is_negative = str[0] == '-';
-	if(is_negative)
+	if (is_negative)
 		str++;
 	strlen = ft_strlen(str);
 	if (strlen > 10)
@@ -34,7 +34,7 @@ static int has_non_int32(char *str)
 	return (0);
 }
 
-static int has_duplicates(t_list *lst)
+static int	has_duplicates(t_list *lst)
 {
 	t_list	*i;
 
@@ -52,9 +52,9 @@ static int has_duplicates(t_list *lst)
 	return (0);
 }
 
-int is_argv_valid(int argc, char **argv, t_list *a)
+int	is_argv_valid(int argc, char **argv, t_list *a)
 {
-	while(--argc >= 0)
+	while (--argc >= 0)
 	{
 		if (has_non_digit(argv[argc]) || has_non_int32(argv[argc]))
 			return (0);
